@@ -30,5 +30,5 @@ var server= http.createServer(function(req,res){
             res.end();
         }
     });
-}).listen(2023);
+}).listen(8080);
 console.log('服务器开启成功...');
