@@ -3,7 +3,7 @@
 #### 介绍
 steganalysis文件夹中包含隐写分析相关的matlab代码和python代码  
 以及相关解释  
-各种语言项目合集https://github.com/resumejob/free-project-course#cc
+
 
 #### 软件架构
 软件架构说明
