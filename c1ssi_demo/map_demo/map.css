@@ -1,0 +1,16 @@
+body{
+	/* 整体背景颜色 */
+background:#FFEBCD;
+}
+a{
+	/* 底部四个标签的样式 */
+	/* 背景色 无下划线 外边距 边距 边距圆滑度 宽高 内边距 */
+    background:#8AC007;
+    text-decoration:none;
+    margin: 5px;
+    border-radius:25px;
+    border: 2px solid #8AC007;
+    width: 50px;
+    height: 20px;
+    padding:10px;
+}
