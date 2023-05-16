@@ -5,35 +5,21 @@ steganalysis文件夹中包含隐写分析相关的matlab代码和python代码
 以及相关解释  
 
 
-#### 软件架构
-软件架构说明
+#### 数据集说明  
+PSB普林斯顿分割集，真实世界扫描得来。  
+包含20类，共计400个，其中261-280这20个人体模型存在网格问题，所以我们实验一般用380个，  
+Li等人用354个  
+
+#### 数字图像隐写分析常用数据集  
+1. BOSSBase (BOWS2):
+BOSSBase (Break Our Steganographic System) is a widely used dataset for image steganalysis.  
+It consists of 10,000 grayscale images in BMP format, with a resolution of 512x512 pixels.  
+2. BOWS2: BOWS2 (Break Our Watermarking System) is another dataset commonly used in steganalysis research.  
+It contains 10,000 grayscale images in BMP format, with a resolution of 512x512 pixels.  
+3. S-UNIWARD: S-UNIWARD is a dataset specifically designed for steganalysis of spatial domain image steganography algorithms.  
+It consists of 50,000 grayscale images in BMP format, with a resolution of 512x512 pixels.  
+4. HUGO: HUGO is a dataset created for steganalysis of JPEG steganography algorithms.   
+It contains 50,000 color images in JPEG format, with a resolution of 512x512 pixels.
 
 
-#### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
