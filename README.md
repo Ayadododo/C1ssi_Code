@@ -15,10 +15,10 @@
     4. 使用方式：下载steganography下的所有.m文件，country是一张载体图片  
         info1 和 info2 是两张宽相等，长度不相等的秘密图像，嵌入后会生成Secret.png文件  
         之后再选择tiqu.m选择Secret.png文件就可以看到提取后的，其中代码将宽度设置为密钥，程序中已写。  
-        载体图像：![载体](country.png)  
-        秘密信息：![秘密信息](info1.png)
-        含密图像：![含密图像](Secret.png)
-    5. 本科所作的毕设demo很多细节处理的不好，诸如将彩色图转换为灰度图最后没转回来，显然这个文件名就有问题，而且当时虽然有gui，但是需要matlab环境，所以就不放了，算是一个复杂图像隐写算法的联系
+        载体图像：![载体](steganography/country.png)  
+        秘密信息：![秘密信息](steganography/info1.png)
+        含密图像：![含密图像](steganography/Secret.png)
+    5. 本科所作的毕设demo很多细节处理的不好，诸如将彩色图转换为灰度图最后没转回来，显然这个文件名就有问题，而且当时虽然有gui，但是需要matlab环境，所以就不放了，算是一个复杂图像隐写算法的练习
 
 
 
