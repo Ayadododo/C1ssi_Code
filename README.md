@@ -28,9 +28,10 @@
 3. 机器学习：通过python+scikit+pandas+numpy处理特征集
 
 
-#### 数据集说明  
+#### 3D模型数据集说明  
 1. PSB普林斯顿分割集，真实世界扫描得来。  
 2. 包含20类，共计400个，其中261-280这20个人体模型存在网格问题，所以我们实验一般用380个  
+3. 5月20日更新：LF文件夹下包含MRS算法嵌入128bit的五个平滑强度的特征集
 
 #### 3D隐写分析相关论文及介绍（按照研究逻辑的时间顺序）
 1. Ying Yang and Ioannis Ivrissimtzis, “Mesh discriminative features for 3D steganalysis,” ACM Transactions on Multimedia Computing, Communications, and Applications, vol. 10, no. 3, pp. 27:1–27:13, 2014.        特征集YANG208
