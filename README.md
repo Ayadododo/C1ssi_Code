@@ -1,10 +1,12 @@
-# Code
+# Code  
+如果有任何问题请发邮件到1072602853@qq.com  
+
 #### 文件说明
 1. steganalysis隐写分析
 2. steganography隐写算法
 
 
-#### 隐写算法
+#### 空域图像隐写算法
 1. 秘密信息：不论格式、编码，最终是一串比特流010101...
 2. 载体：RGB图像、灰度图像
 3. 密钥：编码格式、嵌入方式、嵌入位置等都算隐写算法的密钥
@@ -18,7 +20,7 @@
         载体图像：<img decoding="async" src="steganography/country.png" width="10%"> 
         秘密信息：![秘密信息](steganography/info1.png)
         含密图像：<img decoding="async" src="steganography/Secret.png" width="10%"> 
-    5. 本科所作的毕设demo很多细节处理的不好，诸如将彩色图转换为灰度图最后没转回来，显然这个文件名就有问题，而且当时虽然有gui，但是需要matlab环境，所以就不放了，算是一个复杂图像隐写算法的练习
+    5. 本科毕设demo很多细节处理的不好，诸如将彩色图转换为灰度图最后没转回来，包括文件名采用了拼音命名法等问题，而且当时虽然有gui，但是需要matlab环境，所以就不放了，算是一个复杂图像隐写算法的练习
 
 
 
@@ -29,13 +31,20 @@
 
 
 #### 3D模型数据集说明  
-1. PSB普林斯顿分割集，真实世界扫描得来。  
+1. PSB普林斯顿分割集，真实世界扫描得来。  X. Chen , A. Golovinskiy , T. Funkhouser , A benchmark for 3D mesh segmentation, ACM Trans. Graph. 28 (3) (2009) 73:1–73:12 . 
 2. 包含20类，共计400个，其中261-280这20个人体模型存在网格问题，所以我们实验一般用380个  
 3. 5月20日更新：LF文件夹下包含MRS算法嵌入128bit的五个平滑强度的特征集
 
 #### 3D隐写分析相关论文及介绍（按照研究逻辑的时间顺序）
 1. Ying Yang and Ioannis Ivrissimtzis, “Mesh discriminative features for 3D steganalysis,” ACM Transactions on Multimedia Computing, Communications, and Applications, vol. 10, no. 3, pp. 27:1–27:13, 2014.        特征集YANG208
 2.  Z. Li, A.G. Bors, 3D mesh steganalysis using local shape features, in: Proceedings of IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2016, pp. 2144–2148.       使用局部形状特征的3D网格隐写分析    特征集LFS52
+3. D. Kim , H.-U. Jang , H.-Y. Choi , J. Son , I.-J. Yu , H.-K. Lee , Improved 3D mesh steganalysis using homogeneous kernel map, in: Proc. Int. Conf. on Information Science and Applications, 2017, pp. 358–365 . ——齐次核升维——特征集LFS64
+4. Z. Li and A. G. Bors, “Steganalysis of 3D objects using statistics of local feature sets,” Inf. Sci., vols. 415–416, pp. 85–99, Nov. 2017.——使用局部特征集统计矩的三维隐写分析——LFS76
+5. Z. Li , A.G. Bors , Selection of robust features for the cover source mismatch problem in 3D steganalysis, in: Proc. Int. Conf. on Pattern Recognition, 2016, pp. 4256–4261 . ——基于解决CSM问题的鲁棒特征筛选
+6. Zhou H ,  Chen K ,  Zhang W , et al. Feature-Preserving Tensor Voting Model for Mesh Steganalysis[J]. IEEE Transactions on Visualization and Computer Graphics, 2019, PP(99):1-1.——投票张量特征NVT36——结合LFS64——组成100维NVT+
+7. Li Z ,  Bors A G . Steganalysis of Meshes Based on 3D Wavelet multiresolution Analysis[J]. Information Sciences, 2020, 522:164-179.——3d小波特征228维，与LFS76组成304维效果较好
+8. 平滑强度评测论文，大部分隐写算法在0.3，3参数下效果最好，级联特征效果最好
+9. Li Z ,  Gong D ,  Liu F , et al. 3D Steganalysis Using the Extended Local Feature Set[C]// 2018:1683-1687.——扩展局部特征集——从LFS76到LFS124
 
 #### 数字图像隐写分析常用数据集  
 1. BOSSBase (BOWS2):
