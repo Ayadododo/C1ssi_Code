@@ -57,5 +57,12 @@ It consists of 50,000 grayscale images in BMP format, with a resolution of 512x5
 4. HUGO: HUGO is a dataset created for steganalysis of JPEG steganography algorithms.   
 It contains 50,000 color images in JPEG format, with a resolution of 512x512 pixels.
 
+#### JAVAEE 项目依赖
+当使用Maven管理Vue+springboot+mybatis项目时，通常需要引入依赖，包括  
+1. springboot 相关的web模块，mybatis启动器模块，jdbc模块和lombok模块
+2. vue.js打包模块
+3. 可视化开发文档的swagger模块
+4. springboot的Maven构建配置  
+
 
 
