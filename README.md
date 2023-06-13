@@ -5,25 +5,6 @@
 1. steganalysis隐写分析
 2. steganography隐写算法
 
-
-#### 空域图像隐写算法
-1. 秘密信息：不论格式、编码，最终是一串比特流010101...
-2. 载体：RGB图像、灰度图像
-3. 密钥：编码格式、嵌入方式、嵌入位置等都算隐写算法的密钥
-- 本科毕设：基于边缘检测度量变化的图像隐写
-    1. 秘密信息：二值图像（黑白图像）转换为比特流
-    2. 载体：灰度图像
-    3. 密钥：使用GHM多小波分解载体，嵌入位置由边缘检测低频区域的差值决定
-    4. 使用方式：下载steganography下的所有.m文件，country是一张载体图片  
-        info1 和 info2 是两张宽相等，长度不相等的秘密图像，嵌入后会生成Secret.png文件  
-        之后再选择tiqu.m选择Secret.png文件就可以看到提取后的，其中代码将宽度设置为密钥，程序中已写。  
-        载体图像：<img decoding="async" src="steganography/country.png" width="10%"> 
-        秘密信息：![秘密信息](steganography/info1.png)
-        含密图像：<img decoding="async" src="steganography/Secret.png" width="10%"> 
-    5. 本科毕设demo很多细节处理的不好，诸如将彩色图转换为灰度图最后没转回来，包括文件名采用了拼音命名法等问题，而且当时虽然有gui，但是需要matlab环境，所以就不放了，算是一个复杂图像隐写算法的练习
-
-
-
 #### 三维模型隐写分析介绍
 1. 3d mesh steganalysis 代码包含两个模块1）提取特征2）机器学习
 2. 提取特征：通过matlaba处理.off文件，输出特征集csv
@@ -57,12 +38,133 @@ It consists of 50,000 grayscale images in BMP format, with a resolution of 512x5
 4. HUGO: HUGO is a dataset created for steganalysis of JPEG steganography algorithms.   
 It contains 50,000 color images in JPEG format, with a resolution of 512x512 pixels.
 
-#### JAVAEE 项目依赖
-当使用Maven管理Vue+springboot+mybatis项目时，通常需要引入依赖，包括  
-1. springboot 相关的web模块，mybatis启动器模块，jdbc模块和lombok模块
-2. vue.js打包模块
-3. 可视化开发文档的swagger模块
-4. springboot的Maven构建配置  
+
+#### 三维网格
+针对.off格式的三维网格，MATLAB中可以使用以下几种方法计算两个网格之间的差异：
+
+1. 均方根误差（RMSE）：计算两个网格中每个顶点的坐标差异，并计算其平方的平均值，最后再开方。具体实现如下：
+
+```matlab
+% 读取两个.off格式的网格文件
+[V1, F1] = read_off('mesh1.off');
+[V2, F2] = read_off('mesh2.off');
+
+% 计算顶点坐标差异
+diff = V1 - V2;
+
+% 计算均方根误差（RMSE）
+rmse = sqrt(mean(sum(diff.^2, 2)));
+```
+
+2. 最大误差（Max Error）：计算两个网格中每个顶点的坐标差异，并取其绝对值中的最大值。具体实现如下：
+
+```matlab
+% 读取两个.off格式的网格文件
+[V1, F1] = read_off('mesh1.off');
+[V2, F2] = read_off('mesh2.off');
+
+% 计算顶点坐标差异
+diff = V1 - V2;
+
+% 计算最大误差
+max_error = max(abs(diff(:)));
+```
+
+3. Hausdorff距离（Hausdorff distance）：Hausdorff距离是两个网格之间最大的点到点距离，即第一个网格中的每个点到第二个网格的最近点的距离的最大值，或者第二个网格中的每个点到第一个网格的最近点的距离的最大值。具体实现如下：
+
+```matlab
+% 读取两个.off格式的网格文件
+[V1, F1] = read_off('mesh1.off');
+[V2, F2] = read_off('mesh2.off');
+
+% 计算第一个网格中每个点到第二个网格的最近点的距离
+D1 = pdist2(V1, V2);
+min_D1 = min(D1, [], 2); % 取每行的最小值
+
+% 计算第二个网格中每个点到第一个网格的最近点的距离
+D2 = pdist2(V2, V1);
+min_D2 = min(D2, [], 2); % 取每行的最小值
+
+% 计算Hausdorff距离
+hausdorff_distance = max(max(min_D1), max(min_D2));
+```
 
 
+#### 成对划分样本
+```python
+import random
+import pandas as pd
 
+def generate_indices(n, x):
+    """生成随机标号列表
+
+    Args:
+        n (int): 标号数量
+        x (float): 切分比例
+
+    Returns:
+        list: 随机标号列表
+    """
+    indices = list(range(n))
+    random.shuffle(indices)
+    return indices[:int(n * x)]
+
+def split_data_by_indices(data1_file, data2_file, indices):
+    """按标号将数据分割成四个列表
+
+    Args:
+        data1_file (str): 第一个CSV文件路径
+        data2_file (str): 第二个CSV文件路径
+        indices (list): 随机标号列表
+
+    Returns:
+        tuple: 四个列表，包括data1_train, data1_test, data2_train, data2_test
+    """
+    data1 = pd.read_csv(data1_file)
+    data2 = pd.read_csv(data2_file)
+    data1_train, data1_test, data2_train, data2_test = [], [], [], []
+    for i, row in data1.iterrows():
+        if i in indices:
+            data1_test.append(row)
+        else:
+            data1_train.append(row)
+    for i, row in data2.iterrows():
+        if i in indices:
+            data2_test.append(row)
+        else:
+            data2_train.append(row)
+    return data1_train, data1_test, data2_train, data2_test
+
+def save_data_to_csv(data1_train, data1_test, data2_train, data2_test, prefix):
+    """将四个列表存储到CSV文件中
+
+    Args:
+        data1_train (list): 第一个CSV文件的训练集列表
+        data1_test (list): 第一个CSV文件的测试集列表
+        data2_train (list): 第二个CSV文件的训练集列表
+        data2_test (list): 第二个CSV文件的测试集列表
+        prefix (str): 文件名前缀
+    """
+    pd.DataFrame(data1_train).to_csv(f'{prefix}_data1_train.csv', index=False)
+    pd.DataFrame(data1_test).to_csv(f'{prefix}_data1_test.csv', index=False)
+    pd.DataFrame(data2_train).to_csv(f'{prefix}_data2_train.csv', index=False)
+    pd.DataFrame(data2_test).to_csv(f'{prefix}_data2_test.csv', index=False)
+
+```
+
+
+#### 空域图像隐写算法
+1. 秘密信息：不论格式、编码，最终是一串比特流010101...
+2. 载体：RGB图像、灰度图像
+3. 密钥：编码格式、嵌入方式、嵌入位置等都算隐写算法的密钥
+- 本科毕设：基于边缘检测度量变化的图像隐写
+    1. 秘密信息：二值图像（黑白图像）转换为比特流
+    2. 载体：灰度图像
+    3. 密钥：使用GHM多小波分解载体，嵌入位置由边缘检测低频区域的差值决定
+    4. 使用方式：下载steganography下的所有.m文件，country是一张载体图片  
+        info1 和 info2 是两张宽相等，长度不相等的秘密图像，嵌入后会生成Secret.png文件  
+        之后再选择tiqu.m选择Secret.png文件就可以看到提取后的，其中代码将宽度设置为密钥，程序中已写。  
+        载体图像：<img decoding="async" src="steganography/country.png" width="10%"> 
+        秘密信息：![秘密信息](steganography/info1.png)
+        含密图像：<img decoding="async" src="steganography/Secret.png" width="10%"> 
+    5. 本科毕设demo很多细节处理的不好，诸如将彩色图转换为灰度图最后没转回来，包括文件名采用了拼音命名法等问题，而且当时虽然有gui，但是需要matlab环境，所以就不放了，算是一个复杂图像隐写算法的练习
