@@ -168,3 +168,34 @@ def save_data_to_csv(data1_train, data1_test, data2_train, data2_test, prefix):
         秘密信息：![秘密信息](steganography/info1.png)
         含密图像：<img decoding="async" src="steganography/Secret.png" width="10%"> 
     5. 本科毕设demo很多细节处理的不好，诸如将彩色图转换为灰度图最后没转回来，包括文件名采用了拼音命名法等问题，而且当时虽然有gui，但是需要matlab环境，所以就不放了，算是一个复杂图像隐写算法的练习
+
+
+#### 图像的离散余弦变换
+```python
+from PIL import Image
+import numpy as np
+
+# 读取图片
+img = Image.open('example.jpg')
+
+# 显示图片
+img.show()
+
+# 将图片转换为numpy数组
+img_arr = np.array(img)
+
+# 将数组转换为浮点数类型，并将像素值范围从[0, 255]转换为[-128, 127]
+img_arr = np.float32(img_arr) - 128.0
+
+# 将图片分成8x8的小块，并对每个小块进行DCT变换
+dct_arr = np.zeros_like(img_arr)
+for i in range(0, img_arr.shape[0], 8):
+    for j in range(0, img_arr.shape[1], 8):
+        dct_arr[i:i+8, j:j+8] = np.fft.fft2(img_arr[i:i+8, j:j+8], norm='ortho')
+
+# 将DCT系数矩阵转换为图像
+dct_img = Image.fromarray(np.uint8(dct_arr + 128.0))
+
+# 显示DCT变换后的图像
+dct_img.show()
+```
